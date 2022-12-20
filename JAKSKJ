@@ -1,0 +1,254 @@
+local OrionLib = loadstring(game:HttpGet(('https://raw.githubusercontent.com/shlexware/Orion/main/source')))()
+local Window = OrionLib:MakeWindow({Name = "Higher Speed Every Second", HidePremium = false, SaveConfig = true, ConfigFolder = "OrionTest"})
+
+--Variables
+_G.AutoFarm = true
+_G.Autofarmw = true
+_G.Autohatch = true
+_G.ChooseEgg = true
+_G.Eggtp = true
+_G.Autorebirth = true
+_G.Worldtp = true
+_G.Worldtp2 = true
+_G.Eggbasic = true
+_G.Eggcandy = true
+
+
+-- Functions
+
+function Eggcandy()
+    game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-799.0435180664062, -7.554424285888672, 579.289794921875)
+end
+
+function Eggbasic()
+    game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-439.59906005859375, -7.554424285888672, 578.8690795898438)
+end
+
+function Worldtp2()
+    game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-4070.10302734375, -7.554424285888672, 560.6347045898438)
+end
+
+function Worldtp()
+    game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-393.9967041015625, -7.554424285888672, 553.4335327148438)
+end
+
+
+function Autorebirth()
+    while _G.Autorebirth == true do
+
+local args = {
+    [1] = "S_System_Rebirth",
+    [2] = {}
+}
+
+game:GetService("ReplicatedStorage").Common.Library.Network.RemoteFunction:InvokeServer(unpack(args))
+
+
+    end
+end
+
+
+
+function Eggtp()
+	if _G.Eggtp == "Basic" then game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-440.5864562988281, -7.261671543121338, 578.822509765625) end
+	if _G.Eggtp == "Candy" then game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-799.3353881835938, -7.170037746429443, 579.8021240234375) end
+end
+
+
+function Autohatch()
+    while _G.Autohatch == true do
+
+local args = {
+    [1] = "S_Egg_Open",
+    [2] = {
+        [1] = _G.ChooseEgg,
+        [2] = false
+    }
+}
+
+game:GetService("ReplicatedStorage").Common.Library.Network.RemoteEvent:FireServer(unpack(args))
+wait(.1)
+end
+end
+
+
+
+
+function Autofarm()
+    while _G.AutoFarm == true do
+        game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-438.87359619140625, 144.13729858398438, -2569.3232421875)
+        wait(.5)
+    end
+end
+
+function Autofarmw()
+    while _G.Autofarmw == true do
+        game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-4129.388671875, 146.71505737304688, -257558.265625)
+        wait(.5)
+    end
+end
+
+
+
+-- AutoFarm
+local Main = Window:MakeTab({
+    Name = "Main",
+    Icon = "rbxassetid://4483345998",
+    PremiumOnly = false
+})
+
+local Section = Main:AddSection({
+    Name = "AutoFarm"
+})
+
+Main:AddToggle({
+    Name = "AutoFarm 1 win zone",
+    Default = false,
+    Callback = function(Value)
+        _G.AutoFarm = Value
+        Autofarm()
+    end    
+})
+
+Main:AddToggle({
+    Name = "AutoFarm Best zone",
+    Default = false,
+    Callback = function(Value)
+        _G.Autofarmw = Value
+        Autofarmw()
+    end
+})
+
+local Section = Main:AddSection({
+	Name = "AutoRebirth"
+})
+
+Main:AddToggle({
+    Name = "AutoRebirth",
+    Default = false,
+    Callback = function(Value)
+        _G.Autorebirth = Value
+        Autorebirth()
+    end
+})
+
+
+
+-- Egg
+local Egg = Window:MakeTab({
+    Name = "Eggs",
+    Icon = "rbxassetid://4483345998",
+    PremiumOnly = false
+})
+
+local Section = Egg:AddSection({
+    Name = "AutoHatch"
+})
+
+Egg:AddDropdown({
+    Name = "Choose egg",
+    Default = "Basic",
+    Options = {"Basic", "Candy"},
+    Callback = function(Value)
+        _G.ChooseEgg = Value
+    end    
+})
+
+Egg:AddToggle({
+    Name = "AutoHatch",
+    Default = false,
+    Callback = function(Value)
+        _G.Autohatch = Value
+        Autohatch()
+    end    
+})
+
+--Misc
+
+local Misc = Window:MakeTab({
+	Name = "Misc",
+	Icon = "rbxassetid://4483345998",
+	PremiumOnly = false
+})
+
+local Section = Misc:AddSection({
+	Name = "AntiAfk"
+})
+
+Misc:AddButton({
+	Name = "AntiAfk (does not work rn)",
+	Callback = function()
+      		print("button pressed")
+  	end    
+})
+
+local Teleports = Window:MakeTab({
+	Name = "Teleport",
+	Icon = "rbxassetid://4483345998",
+	PremiumOnly = false
+})
+
+local Section = Teleports:AddSection({
+	Name = "World Tp"
+})
+
+Teleports:AddButton({
+	Name = "First zone",
+	Callback = function()
+        Worldtp()
+  	end    
+})
+
+Teleports:AddButton({
+	Name = "Teleport to last zone",
+	Callback = function()
+      		Worldtp2()
+  	end    
+})
+
+local Section = Teleports:AddSection({
+	Name = "Egg tp"
+})
+
+Teleports:AddButton({
+	Name = "Basic Egg",
+	Callback = function()
+      		Eggbasic()
+  	end    
+})
+
+Teleports:AddButton({
+	Name = "Candy Egg",
+	Callback = function()
+      		Eggcandy()
+  	end    
+})
+
+-- Info
+local Info = Window:MakeTab({
+	Name = "Info",
+	Icon = "rbxassetid://4483345998",
+	PremiumOnly = false
+})
+
+local Section = Info:AddSection({
+	Name = "Made by"
+})
+
+Info:AddLabel("Made by JAKSKJ#6711")
+
+Info:AddButton({
+	Name = "Copy Discord",
+	Callback = function()
+		setclipboard("JAKSKJ#6711")
+  	end    
+})
+
+local Section = Info:AddSection({
+	Name = "Script Info"
+})
+
+Info:AddLabel("EggOpen is  very fast")
+Info:AddLabel("You need to unlock best zone to use the best farm")
+
+OrionLib:Init()
